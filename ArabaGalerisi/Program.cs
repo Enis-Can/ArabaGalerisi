@@ -9,3 +9,7 @@
 // -- Yukarıdaki menü yapısı üzerinden bir araba galerisi uygulaması yapılacak.
 // -- Arabaların (Marka, Model, Model Yılı, Renk, Fiyat) özellikleri olacak.
 // -- 6 ve 7. maddelerdeki zam ve indirim oranları tüm araçları etkileyecek ve miktar girildiğinde yüzdelik olarak zam veya indirim uygulanacak
+
+using ArabaGalerisi;
+
+Console.ReadKey();
