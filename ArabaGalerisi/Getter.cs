@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,50 +10,48 @@ namespace ArabaGalerisi
 {
     internal class Getter
     {
-        public static string GetString(string msg, int min, int max)
+        public static string GetString(string msg, int min = 0, int max = int.MaxValue)
         {
-            string txt = string.Empty;
+            string? txt = string.Empty;
             bool err = false;
             do
             {
                 Console.WriteLine(msg);
                 txt = Console.ReadLine();
-                try
-                {
-                    if (string.IsNullOrEmpty(txt)) throw new Exception("Boş değer girilemez");
-                    else if (txt.Length > max) throw new Exception(string.Format("{0} karakterden fazla olamaz.",max));
-                    else if (txt.Length < min) throw new Exception(string.Format("{0} karakterden az olamaz.", min));
+                    if (string.IsNullOrEmpty(txt))
+                    {
+                        Console.WriteLine("Boş değer girilemez");
+                        err = true;
+                    }
+                    else if (txt.Length > max || txt.Length < min)
+                    {
+                        Console.WriteLine("Minimum {0}, maksimum {1} karakter giriniz.", min, max);
+                        err = true;
+                    }
                     else err = false;
-                }
-                catch(Exception e) 
-                {
-                    Console.WriteLine(e.Message);
-                    err = true;
-                }
             }
             while (err);
             return txt;
         }
 
-        public static int GetInt(string msg, int min, int max)
+        public static int GetInt(string msg, int min = int.MinValue, int max = int.MaxValue)
         {
             int val = 0;
             bool err = false;
             do
             {
                 Console.WriteLine(msg);
-                try
+                if (!int.TryParse(Console.ReadLine(), out val))
                 {
-                    val = int.Parse(Console.ReadLine());
-                    if (val > max) throw new Exception(string.Format("{0} değerinden fazla olamaz.", max));
-                    else if (val < min) throw new Exception(string.Format("{0} değerinden az olamaz.", min));
-                    err = false;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
+                    Console.WriteLine("Geçerli bir tam sayı giriniz.");
                     err = true;
                 }
+                else if (val > max || val < min)
+                {
+                    Console.WriteLine("Minimum {0}, maksimum {1} arasında bir değer giriniz.", min, max);
+                    err = true;
+                }
+                else err = false;
             }
             while (err);
             return val;
@@ -65,42 +64,42 @@ namespace ArabaGalerisi
             do
             {
                 Console.WriteLine(msg);
-                try
+                if (!double.TryParse(Console.ReadLine(), out val))
                 {
-                    val = double.Parse(Console.ReadLine());
-                    if (val > max) throw new Exception(string.Format("{0} değerinden fazla olamaz.", max));
-                    else if (val < min) throw new Exception(string.Format("{0} değerinden az olamaz.", min));
-                    err = false;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
+                    Console.WriteLine("Geçerli bir sayı giriniz.");
                     err = true;
                 }
+                else if (val > max || val < min)
+                {
+                    Console.WriteLine("Minimum {0}, maksimum {1} arasında bir değer giriniz.", min, max);
+                    err = true;
+                }
+                else err = false;
             }
             while (err);
             return val;
         }
 
-        public static DateTime GetDateTime(string msg, int min, int max)
+        public static DateTime GetDateTime(string msg, DateTime min, DateTime max)
         {
             DateTime date = DateTime.MinValue;
             bool err = false;
             do
             {
                 Console.WriteLine(msg);
-                try
+                if (!DateTime.TryParse(Console.ReadLine(), out date))
                 {
-                    date = DateTime.Parse(Console.ReadLine());
-                    if (date.Year > max) throw new Exception(string.Format("Girilen tarih yılı, {0} yılından büyük olamaz.", max));
-                    else if (date.Year < min) throw new Exception(string.Format("Girilen tarih yılı, {0} yılından küçük olamaz", min));
-                    err = false;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
+                    Console.WriteLine("Geçerli bir tarih giriniz.");
                     err = true;
                 }
+                else if (date > max || date < min)
+                {
+                    Console.WriteLine("Minimum {0}, maksimum {1} tarihleri arasında bir değer giriniz.", 
+                        min.ToString("dd MMMM yyyy"), 
+                        max.ToString("dd MMMM yyyy"));
+                    err = true;
+                }
+                else err = false;
             }
             while (err);
             return date;
