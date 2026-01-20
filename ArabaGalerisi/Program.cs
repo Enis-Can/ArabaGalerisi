@@ -12,4 +12,24 @@
 
 using ArabaGalerisi;
 
+ConsoleKey option;
+do
+{
+    Console.Clear();
+    Console.WriteLine("ARABA GALERİ OTOMASYONU");
+    Console.WriteLine("-----------------------");
+    Console.WriteLine("1-) Yeni araç girişi");
+    Console.WriteLine("2-) Mevcut araçları listele");
+    Console.WriteLine("3-) Araç sil");
+    Console.WriteLine("4-) Araç bul");
+    Console.WriteLine("5-) Kayıtlı araç sayısı");
+    Console.WriteLine("6-) İndirim Uygula (Maks. %20)");
+    Console.WriteLine("7-) Zam Yap (Maks. %20)");
+    Console.WriteLine("0-) Çıkış");
+    Console.WriteLine();
+    Console.Write("Bir işlem seçiniz: ");
+    option = Console.ReadKey().Key;
+    Menu.MenuOptions(option);
+} while (option != ConsoleKey.NumPad0 && option != ConsoleKey.D0);
+
 Console.ReadKey();

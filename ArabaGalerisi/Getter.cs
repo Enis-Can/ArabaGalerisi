@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace ArabaGalerisi
 {
@@ -16,7 +15,7 @@ namespace ArabaGalerisi
             bool err = false;
             do
             {
-                Console.WriteLine(msg);
+                Console.Write(msg);
                 txt = Console.ReadLine();
                     if (string.IsNullOrEmpty(txt))
                     {
@@ -40,7 +39,7 @@ namespace ArabaGalerisi
             bool err = false;
             do
             {
-                Console.WriteLine(msg);
+                Console.Write(msg);
                 if (!int.TryParse(Console.ReadLine(), out val))
                 {
                     Console.WriteLine("Geçerli bir tam sayı giriniz.");
@@ -57,13 +56,13 @@ namespace ArabaGalerisi
             return val;
         }
 
-        public static double GetDouble(string msg, double min, double max)
+        public static double GetDouble(string msg, double min = double.MinValue, double max = double.MaxValue)
         {
             double val = 0;
             bool err = false;
             do
             {
-                Console.WriteLine(msg);
+                Console.Write(msg);
                 if (!double.TryParse(Console.ReadLine(), out val))
                 {
                     Console.WriteLine("Geçerli bir sayı giriniz.");
@@ -80,13 +79,35 @@ namespace ArabaGalerisi
             return val;
         }
 
+        public static decimal GetDecimal(string msg, decimal min = decimal.MinValue, decimal max = decimal.MaxValue)
+        {
+            decimal val = 0;
+            bool err = false;
+            do
+            {
+                Console.Write(msg);
+                if(!decimal.TryParse(Console.ReadLine(), out val))
+                {
+                    Console.WriteLine("Geçerli bir fiyat giriniz.");
+                    err = true;
+                }
+                else if(val > max || val < min)
+                {
+                    Console.WriteLine("Minimum {0}, maksimum {1} arasında bir değer giriniz.", min, max);
+                    err = true;
+                }
+                else err = false;
+            } while (err);
+            return val;
+        }
+
         public static DateTime GetDateTime(string msg, DateTime min, DateTime max)
         {
             DateTime date = DateTime.MinValue;
             bool err = false;
             do
             {
-                Console.WriteLine(msg);
+                Console.Write(msg);
                 if (!DateTime.TryParse(Console.ReadLine(), out date))
                 {
                     Console.WriteLine("Geçerli bir tarih giriniz.");
