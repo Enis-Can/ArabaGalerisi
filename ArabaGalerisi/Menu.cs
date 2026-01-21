@@ -9,7 +9,7 @@ namespace ArabaGalerisi
 {
     internal class Menu
     {
-        List<Car> Cars = new();
+        static List<Car> Cars = new();
         public static void MenuOptions(ConsoleKey key)
         {
             switch (key)
