@@ -9,37 +9,37 @@ namespace ArabaGalerisi
 {
     internal class CarFinder
     {
-        public List<Car> FindCarWithBrand(List<Car> filteredCars)
+        public IEnumerable<Car> FindCarWithBrand(IEnumerable<Car> filteredCars)
         {
             string brand = Getter.GetString("Sorgulamak istediğiniz markayı giriniz: ");
-            return filteredCars.Where(x=>x.Marka.ToLower() == brand.ToLower().Trim()).ToList();
+            return filteredCars.Where(x=>x.Marka.ToLower() == brand.ToLower().Trim());
         }
 
-        internal List<Car> FindCarWithColor(List<Car> filteredCars)
+        internal IEnumerable<Car> FindCarWithColor(IEnumerable<Car> filteredCars)
         {
             string color = Getter.GetString("Sorgulamak istediğiniz rengi giriniz: ");
-            return filteredCars.Where(x => x.Renk.ToLower() == color.ToLower().Trim()).ToList();
+            return filteredCars.Where(x => x.Renk.ToLower() == color.ToLower().Trim());
         }
 
-        internal List<Car> FindCarWithModel(List<Car> filteredCars)
+        internal IEnumerable<Car> FindCarWithModel(IEnumerable<Car> filteredCars)
         {
             string model = Getter.GetString("Sorgulamak istediğiniz modeli giriniz: ");
-            return filteredCars.Where(x => x.Model.ToLower() == model.ToLower().Trim()).ToList();
+            return filteredCars.Where(x => x.Model.ToLower() == model.ToLower().Trim());
         }
 
-        internal List<Car> FindCarWithPrice(List<Car> filteredCars)
+        internal IEnumerable<Car> FindCarWithPrice(IEnumerable<Car> filteredCars)
         {
             decimal minPrice = Getter.GetDecimal("Sorgulama için en düşük fiyat değerini giriniz: ");
             decimal maxPrice = Getter.GetDecimal("Sorgulama için en yüksek fiyat değerini giriniz: ");
-            return filteredCars.Where(x => x.Fiyat >= minPrice && x.Fiyat <= maxPrice).ToList();
+            return filteredCars.Where(x => x.Fiyat >= minPrice && x.Fiyat <= maxPrice);
         }
 
-        internal List<Car> FindCarWithYear(List<Car> filteredCars)
+        internal IEnumerable<Car> FindCarWithYear(IEnumerable<Car> filteredCars)
         {
             DateTime date = DateTime.Now;
             int minYear = Getter.GetInt("Minimum model yılını giriniz: ",date.Year-25,date.Year);
             int maxYear = Getter.GetInt("Maksimum model yılını giriniz: ", minYear, date.Year);
-            return filteredCars.Where(x => x.ModelYili >= minYear && x.ModelYili <= maxYear).ToList();
+            return filteredCars.Where(x => x.ModelYili >= minYear && x.ModelYili <= maxYear);
         }
     }
 }

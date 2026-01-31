@@ -10,16 +10,31 @@ namespace ArabaGalerisi
     internal class Car
     {
         // -- Arabaların (Marka, Model, Model Yılı, Renk, Fiyat) özellikleri olacak.
-        public string Marka { get; set; }
-        public string Model { get; set; }
+        public string Marka { get; }
+        public string Model { get; }
         public int ModelYili { get { return ModelTarihi.Year;} }
-        [Required]
-        public DateTime ModelTarihi { get; set; }
-        public string Renk { get; set; }
-        public decimal Fiyat { get; set; }
-        public void Print(int order)
+        public DateTime ModelTarihi { get; }
+        public string Renk { get; }
+        public decimal Fiyat { get; private set; }
+        public string PrintFormat()
         {
-            Console.WriteLine("[{0}] {1} | {2} | {3} | {4} | {5} ₺", order, Marka, Model, Renk, ModelYili, Fiyat);
+            return $"{Marka} | {Model} | {Renk} | {ModelYili} | {Fiyat:C2} ";
+        }
+        public Car(string marka, string model, DateTime modelTarihi, string renk, decimal fiyat)
+        {
+            Marka = marka;
+            Model = model;
+            ModelTarihi = modelTarihi;
+            Renk = renk;
+            Fiyat = fiyat;
+        }
+        public void IncreasePrice(decimal percent)
+        {
+            Fiyat += Math.Round(Fiyat * percent / 100, 2);
+        }
+        public void DecreasePrice(decimal percent)
+        {
+            Fiyat -= Math.Round(Fiyat * percent / 100, 2);
         }
     }
 }

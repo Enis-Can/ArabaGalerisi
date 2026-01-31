@@ -12,6 +12,11 @@
 
 using ArabaGalerisi;
 
+ICarService carService = new CarService();
+IMenuService menuService = new MenuService(carService);
+Menu menu = new Menu(menuService);
+
+
 ConsoleKey option;
 do
 {
@@ -29,7 +34,10 @@ do
     Console.WriteLine();
     Console.Write("Bir işlem seçiniz: ");
     option = Console.ReadKey().Key;
-    Menu.MenuOptions(option);
+    menu.MenuOptions(option);
 } while (option != ConsoleKey.NumPad0 && option != ConsoleKey.D0);
 
+
+Console.WriteLine();
+Console.WriteLine("Çıkmak için herhangi bir tuşa basınız.");
 Console.ReadKey();
