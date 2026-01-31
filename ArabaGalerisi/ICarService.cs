@@ -10,7 +10,7 @@ namespace ArabaGalerisi
     {
         void AddCar(Car car);
         void RemoveCar(Car car);
-        List<Car> GetAllCars();
+        IReadOnlyList<Car> GetAllCars();
         bool HasCars();
         int GetCarCount();
         Car GetCar(int index);

@@ -17,9 +17,9 @@ namespace ArabaGalerisi
         {
             Cars.Remove(car);
         }
-        public List<Car> GetAllCars()
+        public IReadOnlyList<Car> GetAllCars()
         {
-            return Cars;
+            return Cars.AsReadOnly();
         }
         public bool HasCars()
         {
